@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioSeqAligner - Global & Local Sequence Alignment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">BioSeqAligner</div>
+            <h1>Sequence Alignment Analysis</h1>
+            <p class="subtitle">Global & Local Alignment Algorithms</p>
+        </header>
+
+        <main>
+            <!-- Step 1: Input Sequences and Scores -->
+            <section class="card input-card">
+                <h2>📝 Input Parameters</h2>
+                <div class="input-grid">
+                    <div class="input-group full-width">
+                        <label for="seq1">Sequence 1 (Top)</label>
+                        <textarea id="seq1" placeholder="Enter first sequence (e.g., GATTA)..." rows="2"></textarea>
+                    </div>
+                    <div class="input-group full-width">
+                        <label for="seq2">Sequence 2 (Left)</label>
+                        <textarea id="seq2" placeholder="Enter second sequence (e.g., GCAT)..." rows="2"></textarea>
+                    </div>
+                    
+                    <div class="score-inputs">
+                        <div class="input-group">
+                            <label for="match">Match Score</label>
+                            <input type="number" id="match" value="2">
+                        </div>
+                        <div class="input-group">
+                            <label for="mismatch">Mismatch Score</label>
+                            <input type="number" id="mismatch" value="-1">
+                        </div>
+                        <div class="input-group">
+                            <label for="gap">Gap Penalty</label>
+                            <input type="number" id="gap" value="-2">
+                        </div>
+                    </div>
+
+                    <div class="type-selection">
+                        <p class="label-text">Alignment Type</p>
+                        <div class="radio-group">
+                            <label class="radio-card">
+                                <input type="radio" name="alignType" value="global" checked>
+                                <span class="radio-content">
+                                    <strong>Global</strong>
+                                    <small>Needleman-Wunsch</small>
+                                </span>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="alignType" value="local">
+                                <span class="radio-content">
+                                    <strong>Local</strong>
+                                    <small>Smith-Waterman</small>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="actions">
+                    <button id="alignBtn" class="btn btn-primary">⚡ Run Analysis</button>
+                    <button id="resetBtn" class="btn btn-secondary">🔄 Reset Form</button>
+                </div>
+            </section>
+
+            <!-- Results Section (Initially Hidden) -->
+            <section id="resultsSection" class="results-container" style="display: none;">
+                <div class="card result-card">
+                    <h2>📊 Alignment Results</h2>
+                    <div class="score-display">
+                        <span class="score-label">Alignment Score:</span>
+                        <span id="finalScore" class="score-value">0</span>
+                    </div>
+                    
+                    <div class="alignment-strings">
+                        <h3>Optimal Alignment</h3>
+                        <div class="alignment-view">
+                            <div id="alignString1" class="mono-text"></div>
+                            <div id="alignmentMatch" class="mono-text match-indicators"></div>
+                            <div id="alignString2" class="mono-text"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card matrix-card">
+                    <h2>🔢 Scoring Matrix</h2>
+                    <p class="info-text">The optimal path is highlighted in <span class="highlight-swatch"></span></p>
+                    <div class="matrix-wrapper">
+                        <div id="matrixContainer" class="matrix-table"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Error Display -->
+            <div id="errorBox" class="error-box" style="display: none;">
+                <p id="errorMessage"></p>
+            </div>
+        </main>
+
+        <footer>
+            <p>🧪 Computational Biology Laboratory - CSC 442 Project 3</p>
+        </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
